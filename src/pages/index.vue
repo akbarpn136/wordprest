@@ -1,7 +1,7 @@
 <template>
   <q-page>
-    <q-list no-border highlight sparse separator>
-        <q-item v-for="hl in halaman" :key="hl.id">
+    <q-list no-border highlight sparse separator v-if="this.$route.name === 'utama'">
+        <q-item v-for="hl in halaman" :key="hl.id" :to="{name: 'halaman_rinci', params: {'id': hl.id}}">
           <q-item-side :image="ambilFeatureImage(hl._embedded)" v-if="ambilFeatureImage(hl._embedded)" />
           <q-item-main>
             <q-item-tile label>{{hl.title.rendered}}</q-item-tile>
@@ -11,6 +11,7 @@
           </q-item-main>
         </q-item>
     </q-list>
+    <router-view />
   </q-page>
 </template>
 
