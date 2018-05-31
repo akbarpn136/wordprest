@@ -2,7 +2,7 @@
   <q-page>
     <q-list no-border highlight sparse separator v-if="this.$route.name === 'utama'">
         <q-item v-for="hl in halaman" :key="hl.id" :to="{name: 'halaman_rinci', params: {'id': hl.id}}">
-          <q-item-side :image="ambilFeatureImage(hl._embedded)" v-if="ambilFeatureImage(hl._embedded)" />
+          <q-item-side :image="hl._embedded | feature_image" v-if="hl.featured_media > 0" />
           <q-item-main>
             <q-item-tile label>{{hl.title.rendered}}</q-item-tile>
             <q-item-tile sublabel lines="3">
@@ -42,11 +42,6 @@ export default {
       .catch(err => {
         console.log(err)
       })
-    },
-    ambilFeatureImage(data) {
-      if (data['wp:featuredmedia']) {
-        return data['wp:featuredmedia'][0].source_url
-      }
     }
   }
 }
