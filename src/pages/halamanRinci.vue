@@ -2,8 +2,8 @@
   <q-page>
     <q-card square flat>
       <q-card-media>
-        <img :src="ambilFeatureImage(halaman._embedded)" 
-        :alt="halaman.title.rendered" v-if="ambilFeatureImage(halaman._embedded)">
+        <img :src="halaman._embedded | feature_image" 
+        :alt="halaman.title.rendered" v-if="halaman.featured_media > 0">
       </q-card-media>
       <q-card-title>
         {{halaman.title.rendered}}
@@ -35,11 +35,6 @@ export default {
       this.halaman = hl.filter(el => {
         return (el.id === parseInt(id))
       })[0]
-    },
-    ambilFeatureImage(data) {
-      if (data['wp:featuredmedia']) {
-        return data['wp:featuredmedia'][0].source_url
-      }
     }
   }
 }
